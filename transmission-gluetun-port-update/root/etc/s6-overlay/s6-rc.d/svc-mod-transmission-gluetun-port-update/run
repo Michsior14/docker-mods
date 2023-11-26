@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+TRANSMISSION_USERNAME=$USER TRANSMISSION_PASSWORD=$PASS /transmission-gluetun-port-update

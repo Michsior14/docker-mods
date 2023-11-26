@@ -1,0 +1,72 @@
+name: Publish Docker images
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * TUE"
+
+concurrency: ${{ github.workflow }}
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        mod: ["transmission-gluetun-port-update"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get current time
+        id: current-time
+        uses: josStorer/get-current-time@v2
+        with:
+          format: YYYYMMDDhhmmss
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log into Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: michaukrieg
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+      - name: Log into GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get metadata for image
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            michaukrieg/docker-mods
+            ghcr.io/${{ github.repository }}
+          tags: |
+            ${{ matrix.mod }}
+            ${{ matrix.mod }}-${{ steps.current-time.outputs.formattedTime }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          file: ${{ matrix.mod }}/Dockerfile
+          context: ${{ matrix.mod }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          push: true
