@@ -26,7 +26,7 @@ services:
     restart: always
     network_mode: "service:wireguard"
     environment:
-      - DOCKER_MODS=michsior14/docker-mods:transmission-gluetun-port-update # or michaukrieg/docker-mods:transmission-gluetun-port-update
+      - DOCKER_MODS=michaukrieg/docker-mods:transmission-gluetun-port-update # or ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update
       ## Other environment variables e.g
       #- GLUETUN_PORT=8080
 ```
