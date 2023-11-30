@@ -77,5 +77,5 @@ jobs:
         with:
           username: michaukrieg
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-          repository: Michsior14/docker-mods
+          repository: michaukrieg/docker-mods
           short-description: ${{ github.event.repository.description }}
