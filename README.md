@@ -26,9 +26,11 @@ services:
     restart: always
     network_mode: "service:wireguard"
     environment:
-      - DOCKER_MODS=michaukrieg/docker-mods:transmission-gluetun-port-update # or ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update
+      - DOCKER_MODS=ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update # or michaukrieg/docker-mods:transmission-gluetun-port-update
       ## Other environment variables e.g
       #- GLUETUN_PORT=8080
 ```
 
 Supported environment variables can be checked [here](https://github.com/Michsior14/transmission-gluetun-port-update?tab=readme-ov-file#available-environment-variables). Note that `TRANSMISSION_USER` and `TRANSMISSION_PASSWORD` are set automatically based on main image configuration.
+
+Repository: [Michsior14/transmission-gluetun-port-update](https://github.com/Michsior14/docker-mods)
