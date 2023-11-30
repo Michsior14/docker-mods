@@ -43,7 +43,7 @@ jobs:
             ${{ matrix.mod }}-${{ steps.current-time.outputs.formattedTime }}
 
       - name: Build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           file: ${{ matrix.mod }}/Dockerfile
           context: ${{ matrix.mod }}
