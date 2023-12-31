@@ -1,10 +1,23 @@
-FROM golang:1.21-alpine3.18 as build
-COPY root/ /root-layer/
+FROM ghcr.io/linuxserver/baseimage-alpine:3.19 as build
+ARG MOD_VERSION
 
-# Install transmission-gluetun-port-update, cache bust if latest commit changed
-ADD https://api.github.com/repos/Michsior14/transmission-gluetun-port-update/commits?per_page=1 latest_commit
-RUN go install github.com/Michsior14/transmission-gluetun-port-update@latest && \
-    mv /go/bin/transmission-gluetun-port-update /root-layer/transmission-gluetun-port-update
+RUN \
+    if [ -z ${MOD_VERSION+x} ]; then \
+    MOD_VERSION=$(curl https://api.github.com/repos/Michsior14/transmission-gluetun-port-update/releases/latest -s | jq .name -r); \
+    fi && \
+    mkdir -p /root-layer/transmission-gluten-port-update && \
+    curl -o \
+    /root-layer/transmission-gluten-port-update/transmission-gluten-port-update_x86_64.tar.gz -L \
+    "https://github.com/Michsior14/transmission-gluetun-port-update/releases/download/${MOD_VERSION}/transmission-gluetun-port-update_linux_x86_64.tar.gz" && \
+    curl -o \
+    /root-layer/transmission-gluten-port-update/transmission-gluten-port-update_aarch64.tar.gz -L \
+    "https://github.com/Michsior14/transmission-gluetun-port-update/releases/download/${MOD_VERSION}/transmission-gluetun-port-update_linux_arm64.tar.gz" && \
+    echo "******** run basic test to validate tarballs *********" && \
+    for i in x86_64 aarch64; do \
+    mkdir -p "/tmp/${i}"; \
+    tar xzf "/root-layer/transmission-gluten-port-update/transmission-gluten-port-update_${i}.tar.gz" -C "/tmp/${i}"; \
+    done
+COPY root/ /root-layer/
 
 FROM scratch
 COPY --from=build /root-layer/ /
