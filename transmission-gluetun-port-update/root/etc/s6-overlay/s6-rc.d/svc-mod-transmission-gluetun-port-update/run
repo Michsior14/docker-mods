@@ -1,3 +1,15 @@
 #!/usr/bin/with-contenv bash
 
-TRANSMISSION_USERNAME=$USER TRANSMISSION_PASSWORD=$PASS /transmission-gluetun-port-update
+ARCH=$(uname -m)
+
+if [ -f "/transmission-gluten-port-update/transmission-gluten-port-update_${ARCH}.tar.gz" ]; then
+    echo "Installing transmission-gluten-port-update"
+    tar xf "/transmission-gluten-port-update/transmission-gluten-port-update_${ARCH}.tar.gz" -C /transmission-gluten-port-update
+    rm -rf \
+        /transmission-gluten-port-update/transmission-gluten-port-update_x86_64.tar.gz \
+        /transmission-gluten-port-update/transmission-gluten-port-update_aarch64.tar.gz
+else
+    echo "transmission-gluten-port-update already installed, skipping"
+fi
+
+TRANSMISSION_USERNAME=$USER TRANSMISSION_PASSWORD=$PASS /transmission-gluetun-port-update/transmission-gluten-port-update
