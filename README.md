@@ -28,9 +28,10 @@ services:
     environment:
       - DOCKER_MODS=ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update # or michaukrieg/docker-mods:transmission-gluetun-port-update
       ## Other environment variables e.g
-      #- GLUETUN_PORT=8080
+      #- GLUETUN_PORT=
+      #- WHITELIST=127.0.0.1,other,addresses ## If used make sure 127.0.0.1 is kept to avoid rcp errors
 ```
 
 Supported environment variables can be checked [here](https://github.com/Michsior14/transmission-gluetun-port-update?tab=readme-ov-file#available-environment-variables). Note that `TRANSMISSION_USER` and `TRANSMISSION_PASSWORD` are set automatically based on main image configuration.
 
-Repository: [Michsior14/transmission-gluetun-port-update](https://github.com/Michsior14/docker-mods)
+Repository: [Michsior14/transmission-gluetun-port-update](https://github.com/Michsior14/transmission-gluetun-port-update)
