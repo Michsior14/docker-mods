@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19 as build
+FROM ghcr.io/linuxserver/baseimage-alpine:3.20 as build
 ARG MOD_VERSION
 
 RUN \
