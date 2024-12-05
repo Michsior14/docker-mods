@@ -4,6 +4,10 @@ Collection of mod for linuxserver.io docker containers.
 
 Based on [jordanpotter/docker-mods](https://github.com/jordanpotter/docker-mods).
 
+## Tags
+
+Each tag is in the format of <imagename>-<modname> for the latest versions, and <imagename>-<modname>-<version> for the specific versions.
+
 ## Available mods
 
 ### transmission-gluetun-port-update
@@ -13,8 +17,6 @@ Updates the port in the transmission configuration to match the port forwarding 
 #### Usage
 
 ```yaml
-version: "3.8"
-
 services:
   wireguard:
     image: ghcr.io/qdm12/gluetun
