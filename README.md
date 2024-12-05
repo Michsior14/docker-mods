@@ -6,7 +6,7 @@ Based on [jordanpotter/docker-mods](https://github.com/jordanpotter/docker-mods)
 
 ## Tags
 
-Each tag is in the format of <imagename>-<modname> for the latest versions, and <imagename>-<modname>-<version> for the specific versions.
+Each tag is in the format of `<imagename>-<modname>` for the latest versions, and `<imagename>-<modname>-<version>` for the specific versions.
 
 ## Available mods
 
