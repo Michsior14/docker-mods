@@ -84,7 +84,7 @@ jobs:
           push: true
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: michaukrieg
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
