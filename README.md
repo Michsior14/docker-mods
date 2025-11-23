@@ -31,6 +31,7 @@ services:
       - DOCKER_MODS=ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update # or michaukrieg/docker-mods:transmission-gluetun-port-update
       ## Other environment variables e.g
       #- GLUETUN_PORT=
+      #- GLUETUN_ENDPOINT=/v1/portforward ## In case of using gluetun v4
       #- WHITELIST=127.0.0.1,other,addresses ## If used make sure 127.0.0.1 is kept to avoid rcp errors
 ```
 
