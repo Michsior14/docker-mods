@@ -41,7 +41,7 @@ jobs:
 
       - name: Get metadata for image
         id: metadata
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: |
             michaukrieg/docker-mods
